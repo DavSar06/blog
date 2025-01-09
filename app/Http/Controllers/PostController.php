@@ -135,4 +135,19 @@ class PostController extends Controller
         return view('home', ['posts' => $posts]);
     }
 
+    /*
+     * Ajax Search
+     */
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $posts = Post::with('user')
+            ->where('title', 'like', '%' . $query . '%')
+            ->orWhere('body', 'like', '%' . $query . '%')
+            ->get();
+
+        return response()->json([
+            'data' => $posts
+        ]);
+    }
 }

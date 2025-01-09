@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/post/{id}', [PostController::class, 'read'])->name('post.show');
+Route::get('/search', [PostController::class, 'search'])->name('search');
+Route::get('/mysearch', [UserController::class, 'search'])->name('mysearch');
 // Need to be Authenticated and Verified
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage', [UserController::class, 'userPosts'])->name('userPosts');
